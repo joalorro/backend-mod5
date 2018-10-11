@@ -2,7 +2,7 @@ class TherapistsController < ApplicationController
 	before_action :set_therapist, only: [:show,:update]
 
 	def show 
-
+		render json: @therapist, status: 200
 	end 
 
 	def create 
@@ -16,7 +16,7 @@ class TherapistsController < ApplicationController
 	private 
 
 		def therapist_params 
-
+			
 		end 
 
 		def set_therapist 

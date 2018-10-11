@@ -1,3 +1,5 @@
 class ProgramSerializer < ActiveModel::Serializer
-  attributes :id
+	belongs_to :patient
+	belongs_to :therapist
+	attributes :id
 end

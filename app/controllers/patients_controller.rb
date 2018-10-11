@@ -3,6 +3,7 @@ class PatientsController < ApplicationController
 
 	def show 
 
+		render json: @patient, status: 200
 	end 
 
 	def create 
