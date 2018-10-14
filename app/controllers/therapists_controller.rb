@@ -6,7 +6,13 @@ class TherapistsController < ApplicationController
 	end 
 
 	def create 
-
+		@therapist = Therapist.new therapist_params
+		if @therapist.save 
+			@therapist.identifier = @therapist.id
+			render json: @therapist, status: 200
+		else 
+			byebug
+		end 
 	end 
 
 	def update 
@@ -16,7 +22,7 @@ class TherapistsController < ApplicationController
 	private 
 
 		def therapist_params 
-			
+			params.require(:therapist).permit(:first_name,:last_name,:license,:degree,:certifications,:email,:password)
 		end 
 
 		def set_therapist 

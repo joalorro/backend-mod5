@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 	resources :therapists, only: [:show,:create,:update]
 	resources :patients, only: [:index,:show,:create,:destroy,:update]
 	resources :programs, only: [:show,:create,:destroy,:update]
-	resources :exercises, except: [:index]
+	resources :exercises
 	resources :comments, except: [:index]
 
 end

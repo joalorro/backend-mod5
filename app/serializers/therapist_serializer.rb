@@ -1,3 +1,3 @@
 class TherapistSerializer < ActiveModel::Serializer
-		attributes :id, :name, :email, :password, :license, :certifications, :identifier, :degree
+		attributes :id, :first_name, :last_name, :email, :password, :license, :certifications, :identifier, :degree
 end

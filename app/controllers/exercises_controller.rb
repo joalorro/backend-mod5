@@ -1,6 +1,11 @@
 class ExercisesController < ApplicationController
 	before_action :set_exercise, only: [:show,:update]
 
+	def index 
+		@exercises = Exercise.all
+		render json: @exercises, status: 200
+	end 
+
 	def show 
 		render json: @exercise, status: 200
 	end 
