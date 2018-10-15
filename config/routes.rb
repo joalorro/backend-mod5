@@ -6,4 +6,9 @@ Rails.application.routes.draw do
 	resources :exercises
 	resources :comments, except: [:index]
 
+	# resources :sessions, only: [:show,:create,:destroy]
+
+	post '/sessions/create', to: 'sessions#create'
+	get '/therapists/:id/patients', to: 'therapists#show_patients'
+
 end

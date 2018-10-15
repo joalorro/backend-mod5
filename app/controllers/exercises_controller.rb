@@ -11,7 +11,11 @@ class ExercisesController < ApplicationController
 	end 
 
 	def create 
-
+		@exercise = Exercise.new exercise_params
+		
+		if @exercise.save 
+			render json: @exercise, status: 200
+		end 
 	end 
 
 	def update 
@@ -25,7 +29,7 @@ class ExercisesController < ApplicationController
 	private 
 
 		def exercise_params 
-
+			params.require[:exercise].permit[:name,:desc,:program_id,:flagged]
 		end 
 
 		def set_exercise 

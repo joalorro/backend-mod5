@@ -11,7 +11,8 @@ class PatientsController < ApplicationController
 	end 
 
 	def create 
-		@patient = Patient.new patient_params
+		@patient = Patient.new(first_name: patient_params[:first_name], last_name: patient_params[:last_name], email: patient_params[:email], password: patient_params[:password])
+		@patient.therapists << Therapist.find(patient_params[:identifier])
 		if @patient.save 
 			render json: @patient, status: 200
 		else 
@@ -35,7 +36,7 @@ class PatientsController < ApplicationController
 	private 
 
 		def patient_params 
-			params.require(:patient).permit(:first_name,:last_name,:email,:password)
+			params.require(:patient).permit(:first_name,:last_name,:email,:password,:identifier)
 		end 
 
 		def set_patient 

@@ -19,6 +19,18 @@ class TherapistsController < ApplicationController
 
 	end 
 
+	def show_patients
+		@therapist = Therapist.find params[:id]
+		patients_array = @therapist.patients.map {|p| {
+			id: p.id,
+			first_name: p.first_name,
+			last_name: p.last_name,
+			email: p.email
+		}}
+		
+		render json: patients_array.to_json
+	end 
+
 	private 
 
 		def therapist_params 
