@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
 	post '/sessions/create', to: 'sessions#create'
 	get '/therapists/:id/patients', to: 'therapists#show_patients'
+	post '/get_comments', to: 'comments#get_comments'
 
 end

@@ -1,5 +1,15 @@
 class ExerciseSerializer < ActiveModel::Serializer
-	attributes :id, :name, :desc, :flagged, :patient, :therapist
+	attributes :id, :name, :desc, :url, :flagged, :patient, :therapist
+
+	has_many :comments
+
+	def url 
+		if self.object.url
+			YoutubeID.from(self.object.url)
+		else
+			nil
+		end 
+	end 
 
 	def patient
 		patient = self.object.program.patient

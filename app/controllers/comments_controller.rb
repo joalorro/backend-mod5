@@ -7,7 +7,17 @@ class CommentsController < ApplicationController
 	end 
 
 	def create 
+		@comment = Comment.new comment_params 
+		if @comment.save 
+			render json: @comment,status: 200
+		else 
+			render json: @comment.errors 
+		end 
+	end 
 
+	def get_comments
+		@comments = Comment.all.select { |c| params[:exercise_ids].include?(c.id) }
+		render json: @comments, status: 200
 	end 
 
 	def update 
@@ -25,6 +35,6 @@ class CommentsController < ApplicationController
 		end 
 
 		def comment_params 
-
+			params.require(:comment).permit(:content,:exercise_id)
 		end 
 end

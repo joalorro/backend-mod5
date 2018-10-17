@@ -3,6 +3,7 @@ class ExercisesController < ApplicationController
 
 	def index 
 		@exercises = Exercise.all
+		
 		render json: @exercises, status: 200
 	end 
 
@@ -11,10 +12,13 @@ class ExercisesController < ApplicationController
 	end 
 
 	def create 
-		@exercise = Exercise.new exercise_params
-		
+		@exercise = Exercise.new name: exercise_params[:name], desc: exercise_params[:desc], url: exercise_params[:url]
+		@program = Program.find_by patient_id: exercise_params[:patient_id], therapist_id: exercise_params[:therapist_id]
+		@exercise.program = @program
 		if @exercise.save 
 			render json: @exercise, status: 200
+		else 
+			render json: @exercise.errors
 		end 
 	end 
 
@@ -29,7 +33,7 @@ class ExercisesController < ApplicationController
 	private 
 
 		def exercise_params 
-			params.require[:exercise].permit[:name,:desc,:program_id,:flagged]
+			params.require(:exercise).permit(:name,:desc,:url, :patient_id, :therapist_id)
 		end 
 
 		def set_exercise 
