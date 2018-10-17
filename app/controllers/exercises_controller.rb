@@ -30,6 +30,15 @@ class ExercisesController < ApplicationController
 
 	end 
 
+	def toggle_flag 
+		@exercise = Exercise.find params[:id]
+		if @exercise.update flagged: !@exercise.flagged
+			render json: true 
+		else 
+			render json: false 
+		end 
+	end 
+
 	private 
 
 		def exercise_params 

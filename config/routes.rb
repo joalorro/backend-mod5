@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 	resources :comments, except: [:index]
 
 	# resources :sessions, only: [:show,:create,:destroy]
+	get '/therapists/:id/patients', to: 'therapists#get_patients'
 
 	post '/sessions/create', to: 'sessions#create'
-	get '/therapists/:id/patients', to: 'therapists#show_patients'
 	post '/get_comments', to: 'comments#get_comments'
+	post '/exercises/:id/flag', to: 'exercises#toggle_flag'
 
 end
