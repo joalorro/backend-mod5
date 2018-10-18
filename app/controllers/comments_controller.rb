@@ -7,11 +7,14 @@ class CommentsController < ApplicationController
 	end 
 
 	def create 
-		@comment = Comment.new comment_params 
+		@comment = Comment.new content: comment_params[:content], exercise_id: comment_params[:exercise_id]
+		model = params[:commenter_type].titlecase.constantize
+		@comment.commenter = model.find params[:commenter_id]
 		if @comment.save 
-			render json: @comment,status: 200
+			render json: @comment, status: 200
 		else 
-			render json: @comment.errors 
+			byebug
+			render json: @comment.errors, status: :unprocessable_entity
 		end 
 	end 
 
@@ -35,6 +38,6 @@ class CommentsController < ApplicationController
 		end 
 
 		def comment_params 
-			params.require(:comment).permit(:content,:exercise_id)
+			params.require(:comment).permit(:content,:exercise_id,:commenter_id,:commenter_type)
 		end 
 end

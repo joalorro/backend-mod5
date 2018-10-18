@@ -18,8 +18,11 @@ ActiveRecord::Schema.define(version: 2018_10_11_182304) do
   create_table "comments", force: :cascade do |t|
     t.integer "exercise_id"
     t.string "content"
+    t.string "commenter_type"
+    t.bigint "commenter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commenter_type", "commenter_id"], name: "index_comments_on_commenter_type_and_commenter_id"
   end
 
   create_table "exercises", force: :cascade do |t|
