@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
 			
 			render status: 200, json: @session_user
 		else
-			byebug
-			# render {json: @session_user.errors, status: 422}
+			render json: @session_user.errors, status: 422
 		end 
 	end 
 end

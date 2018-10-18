@@ -39,6 +39,16 @@ class ExercisesController < ApplicationController
 		end 
 	end 
 
+	# def get_comments 
+	# 	@exercise = Exercise.find params[:id]
+
+	# 	if @exercise
+	# 		render json: @exercise.comments, status: 200
+	# 	else 
+	# 		render json: @exercise.errors, status: 422
+	# 	end 
+	# end 
+
 	private 
 
 		def exercise_params 

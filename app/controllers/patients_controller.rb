@@ -33,6 +33,18 @@ class PatientsController < ApplicationController
 
 	end 
 
+	def get_exercises 
+		@exercises = Exercise.all.select {|e| e.program.patient.id == params[:id].to_i}.map{ |e| {
+			id: e.id,
+			name: e.name,
+			desc: e.desc,
+			videoId: YoutubeID.from(e.url),
+			flagged: e.flagged,
+			comments: e.comments
+		}}
+		render json: @exercises, status: 200
+	end 
+
 	private 
 
 		def patient_params 

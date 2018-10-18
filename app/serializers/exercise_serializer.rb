@@ -1,8 +1,6 @@
 class ExerciseSerializer < ActiveModel::Serializer
 	attributes :id, :name, :desc, :url, :flagged, :patient, :therapist
 
-	has_many :comments
-
 	def url 
 		if self.object.url
 			YoutubeID.from(self.object.url)
@@ -34,6 +32,6 @@ class ExerciseSerializer < ActiveModel::Serializer
 			certificaitons: therapist.certifications
 		}
 		therapistHash
-	end 
+	end
 
 end

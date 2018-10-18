@@ -7,10 +7,16 @@ Rails.application.routes.draw do
 	resources :comments, except: [:index]
 
 	# resources :sessions, only: [:show,:create,:destroy]
+
+	#routes for therapists
 	get '/therapists/:id/patients', to: 'therapists#get_patients'
+	get '/therapists/:id/exercises', to: 'therapists#get_exercises'
+	
+	#routes for patients
+	get '/patients/:id/exercises', to: 'patients#get_exercises'
+	post '/exercises/:id/flag', to: 'exercises#toggle_flag'
 
 	post '/sessions/create', to: 'sessions#create'
 	post '/get_comments', to: 'comments#get_comments'
-	post '/exercises/:id/flag', to: 'exercises#toggle_flag'
 
 end

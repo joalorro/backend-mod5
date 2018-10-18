@@ -25,6 +25,19 @@ class TherapistsController < ApplicationController
 		render json: @patients 
 	end 
 
+	def get_exercises 
+		@exercises = Exercise.all.select { |e| e.program.therapist.id == params[:id].to_i }.map { |e| {
+			id: e.id,
+			patientId: e.program.patient.id,
+			name: e.name,
+			desc: e.desc,
+			videoId: YoutubeID.from(e.url),
+			flagged: e.flagged,
+			comments: e.comments
+		}}
+		render json: @exercises, status: 200
+	end 
+
 	private 
 
 		def therapist_params 

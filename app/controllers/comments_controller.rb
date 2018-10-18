@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 	end 
 
 	def get_comments
-		@comments = Comment.all.select { |c| params[:exercise_ids].include?(c.id) }
+		@comments = Comment.all.select { |c| params[:exercise_ids].include?(c.exercise_id) }
 		render json: @comments, status: 200
 	end 
 
