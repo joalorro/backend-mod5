@@ -19,4 +19,8 @@ Rails.application.routes.draw do
 	post '/sessions/create', to: 'sessions#create'
 	post '/get_comments', to: 'comments#get_comments'
 
+	#session routes 
+	post '/login', to: "sessions#login"
+	get '/persist', to: 'sessions#persist'
+
 end
