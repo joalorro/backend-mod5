@@ -11,7 +11,7 @@ class TherapistsController < ApplicationController
 			@therapist.identifier = @therapist.id
 			render json: @therapist, status: 200
 		else 
-			byebug
+			render json: @therapist.errors, status: :unprocessable_entity
 		end 
 	end 
 
