@@ -11,22 +11,28 @@ class PatientsController < ApplicationController
 	end 
 
 	def create 
-		@patient = Patient.new(first_name: patient_params[:first_name], last_name: patient_params[:last_name], email: patient_params[:email], password: patient_params[:password])
-		@patient.therapists << Therapist.find(patient_params[:identifier])
+		@patient = Patient.new(first_name: patient_params[:first_name], last_name: patient_params[:last_name], email: patient_params[:email], password: patient_params[:password], email_confirmation: patient_params[:email_confirmation], password_confirmation: patient_params[:password_confirmation])
+		
+		if Therapist.find_by(id: patient_params[:identifier])
+			@therapist = Therapist.find_by(id: patient_params[:identifier].to_i) 
+			@patient.therapists << @therapist
+		end 
+
 		if @patient.save 
-			render json: @patient, status: 200
+			token = JWT.encode({"patient_id" => @patient.id}, "071618")
+			render({json: {
+				patient: {
+					id: @patient.id,
+					first_name: @patient.first_name,
+					last_name: @patient.last_name,
+					token: token,
+					email: @patient.email
+				}
+			}, status: :created})
 		else 
 			byebug
-		end 
-		# respond_to do |format|
-		# 	if @patient.save
-		# 		format.html { redirect_to @patient, notice: 'patient was successfully created.' }
-		# 		format.json { render :show, status: :created, location: @patient }
-		# 	else
-		# 		format.html { render :new }
-		# 		format.json { render json: @patient.errors, status: :unprocessable_entity }
-		# 	end
-		# end 
+			render ({json: {errors: @patient.errors.full_messages}, status: :unprocessable_entity})
+		end
 	end 
 
 	def update 
@@ -48,7 +54,7 @@ class PatientsController < ApplicationController
 	private 
 
 		def patient_params 
-			params.require(:patient).permit(:first_name,:last_name,:email,:password,:identifier)
+			params.require(:patient).permit(:first_name,:last_name,:email, :email_confirmation, :password, :password_confirmation, :identifier)
 		end 
 
 		def set_patient 

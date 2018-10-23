@@ -26,7 +26,6 @@ class SessionsController < ApplicationController
 		rescue JWT::DecodeError
 			nil
 		end
-
 		if payload 
 			model = payload[0].keys[0].split('_')[0]
 			class_name = model.titlecase.constantize
