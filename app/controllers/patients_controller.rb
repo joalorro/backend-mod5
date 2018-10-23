@@ -30,7 +30,6 @@ class PatientsController < ApplicationController
 				}
 			}, status: :created})
 		else 
-			byebug
 			render ({json: {errors: @patient.errors.full_messages}, status: :unprocessable_entity})
 		end
 	end 
