@@ -11,27 +11,27 @@ class PatientsController < ApplicationController
 	end 
 
 	def create 
-		@patient = Patient.new(first_name: patient_params[:first_name], last_name: patient_params[:last_name], email: patient_params[:email], password: patient_params[:password], email_confirmation: patient_params[:email_confirmation], password_confirmation: patient_params[:password_confirmation])
-		
-		if Therapist.find_by(id: patient_params[:identifier])
-			@therapist = Therapist.find_by(id: patient_params[:identifier].to_i) 
-			@patient.therapists << @therapist
+		@patient = Patient.new({
+			first_name: patient_params[:first_name],
+			last_name: patient_params[:last_name],
+			email: patient_params[:email],
+			password: patient_params[:password],
+			email_confirmation: patient_params[:email_confirmation],
+			password_confirmation: patient_params[:password_confirmation]
+		})
+		@therapist = validate_therapist(patient_params[:identifier].to_i)
+
+		if @therapist
+			@patient.save 
+			generate_program
+			patient_obj = generate_patient_obj
+			render({json: {patient: patient_obj }, status: :created})
+		else 
+			@patient.errors.add(:therapists,:must_exist, message: 'identifier must be valid')
+			byebug
+			render ({json: {errors: @patient.errors.full_messages}, status: :unprocessable_entity})
 		end 
 
-		if @patient.save 
-			token = JWT.encode({"patient_id" => @patient.id}, "071618")
-			render({json: {
-				patient: {
-					id: @patient.id,
-					first_name: @patient.first_name,
-					last_name: @patient.last_name,
-					token: token,
-					email: @patient.email
-				}
-			}, status: :created})
-		else 
-			render ({json: {errors: @patient.errors.full_messages}, status: :unprocessable_entity})
-		end
 	end 
 
 	def update 
@@ -58,5 +58,24 @@ class PatientsController < ApplicationController
 
 		def set_patient 
 			@patient = Patient.find params[:id]
+		end 
+
+		def validate_therapist identifier
+			Therapist.find_by(id: identifier)
+		end 
+
+		def generate_program
+			@program = Program.create(patient_id: @patient.id, therapist_id: @therapist.id)
+		end 
+
+		def generate_patient_obj
+			token = JWT.encode({"patient_id" => @patient.id}, "071618")
+			{
+				id: @patient.id,
+				first_name: @patient.first_name,
+				last_name: @patient.last_name,
+				token: token,
+				email: @patient.email
+			}
 		end 
 end

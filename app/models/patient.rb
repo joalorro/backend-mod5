@@ -13,13 +13,6 @@ class Patient < ApplicationRecord
 	validates :first_name, presence: true
 	validates :last_name, presence: true
 
-	validate :therapist
-
 	has_secure_password
 
-	def therapist 
-		if therapists.length == 0
-			errors.add(:therapists,:must_exist, message: 'identifier must be valid')
-		end 
-	end 
 end
