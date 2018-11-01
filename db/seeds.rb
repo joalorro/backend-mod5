@@ -12,15 +12,15 @@ Program.destroy_all
 Exercise.destroy_all
 Comment.destroy_all
 
-john = Therapist.create( first_name: 'John', last_name: 'Doe', email: 'john@doe.com', password: 'john', license: '12345', certifications: 'OCS, CSCS', degree:'DPT')
+jane = Therapist.create( first_name: 'Jane', last_name: 'Doe', email: 'jane@doe.com', password: 'jane', license: '12345', certifications: 'OCS, CSCS', degree:'DPT')
 
 one = Patient.create( first_name: 'Patient', last_name: 'One', email:'patient@one.com', password: 'one')
 two = Patient.create( first_name: 'Patient', last_name: 'Two', email:'patient@two.com', password: 'two')
 three = Patient.create( first_name: 'Patient', last_name: 'Three', email:'patient@three.com', password: 'three')
 
-program_one = Program.create(patient: one, therapist: john)
-program_two = Program.create(patient: two, therapist: john)
-program_three = Program.create(patient: three, therapist: john)
+program_one = Program.create(patient: one, therapist: jane)
+program_two = Program.create(patient: two, therapist: jane)
+program_three = Program.create(patient: three, therapist: jane)
 
 Exercise.create(
 	name: 'Push Ups',
