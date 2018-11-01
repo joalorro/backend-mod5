@@ -28,31 +28,6 @@ rails s
 * ActiveModelSerializers & Rack Cors - To drive API functionality
 * JWT & bcrypt - To provide auth and password hashing
 
-### Testing
-
-If you want to use the provided dummy data within the seed file, you can login with the following login information:
-
-Login as a therapist
-```
-email: jane@doe.com
-password: jane
-```
-Login as Patient One
-```
-email: patient@one.com
-password: one
-```
-Login as Patient Two
-```
-email: patient@two.com
-password: two
-```
-Login as Patient Three
-```
-email: patient@three.com
-password: three
-```
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
