@@ -1,28 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # HomeEx Helper
 
 HomeEx Helper is a react-based application that serves to provide a platform through which physical therapists can better manage the home exercise programs of patients. Therapists can sign-up by providing the necessary information and details of their licensure and credentials as a physical therapist. They are then given a unique identifier (which, at the moment, is merely their id in the database) that they can share with their patients that upon patient signup, can be used to create the association between therapist and patients. Once the relationship is established, therapists will be allowed to deploy exercises for their patients by providing descriptions and video links that will serve as guides for their patients. Once logged in, patients can then see the newly deployed exercises and interact with each exercise by raising concerns and "flagging" certain exercises and asking questions in the comments section of each exercise.
@@ -39,69 +14,32 @@ Before running, be sure to have the following installed and running:
 
 ### Installing
 
-```
-Give the example
-```
-
-And repeat
+Run the following in the root directory in order:
 
 ```
-until finished
+bundle install
+rake db:setup
+rake db:migrate
+rake db:seed (if you want dummy data to work with)
+rails s
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* Ruby on Rails - The backend framework used
+* ActiveModelSerializers & Rack Cors - To drive API functionality
+* JWT & bcrypt - To provide auth and password hashing
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* Josue Vicente Alorro
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* Hat tip to all friends and instructors for the inspiration and your guidance throughout the making of this project
