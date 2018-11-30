@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
 		if @comment.save 
 			render json: @comment, status: 200
 		else 
-			byebug
 			render json: @comment.errors, status: :unprocessable_entity
 		end 
 	end 

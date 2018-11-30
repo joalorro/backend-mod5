@@ -14,7 +14,7 @@ Before running, be sure to have the following installed and running:
 
 ### Installing
 
-Run the following in the root directory in order:
+Run the following from your terminal in the root directory of this repo:
 
 ```
 bundle install

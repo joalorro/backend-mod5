@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 		model = params[:model] 
 		class_name = model.titlecase.constantize 
 		@session_user = class_name.find_by(email: params[:email])
+		
 		if (@session_user && @session_user.authenticate(params[:password]))
 			token = JWT.encode({"#{model}_id" => @session_user.id}, "071618")
 			render({json: {
@@ -15,7 +16,10 @@ class SessionsController < ApplicationController
 				}
 			}, status: :accepted})
 		else 
-			render json: {error: 'Invalid Username or Password', status: :unauthorized}
+			byebug
+			render json: {
+				error: 'Invalid Username or Password', status: :unauthorized
+			}
 		end 
 	end 
 
