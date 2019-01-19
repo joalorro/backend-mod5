@@ -28,7 +28,6 @@ class PatientsController < ApplicationController
 			render({json: {patient: patient_obj }, status: :created})
 		else 
 			@patient.errors.add(:therapists,:must_exist, message: 'identifier must be valid')
-			byebug
 			render ({json: {errors: @patient.errors.full_messages}, status: :unprocessable_entity})
 		end 
 

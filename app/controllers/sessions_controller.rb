@@ -16,7 +16,6 @@ class SessionsController < ApplicationController
 				}
 			}, status: :accepted})
 		else 
-			byebug
 			render json: {
 				error: 'Invalid Username or Password', status: :unauthorized
 			}
